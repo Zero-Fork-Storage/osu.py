@@ -1,4 +1,3 @@
 osu.py
-=======
-
-Unofficial osu-api asynchronous python wrapper
+======
+osu-api v2 python wrapper
