@@ -1,4 +1,5 @@
 import requests
+
 from osu.oauth.model import ClientCredentialModel
 
 
@@ -8,11 +9,11 @@ class AuthorizationError(Exception):
 
 class ClientCredentials:
     def __init__(
-            self,
-            client_id: int,
-            client_secret: str,
-            grant_type: str = "client_credentials",
-            scope: str = "public"
+        self,
+        client_id: int,
+        client_secret: str,
+        grant_type: str = "client_credentials",
+        scope: str = "public",
     ) -> None:
         """osu.py
 
@@ -37,20 +38,19 @@ class ClientCredentials:
         self.scope = scope
 
         self.url = "https://osu.ppy.sh/oauth/token"
-        self.headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+        self.headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
 
     def get_access_token(self) -> ClientCredentialModel:
         query = {
             "client_id": self.client_id,
             "client_secret": self.client_secret,
             "grant_type": self.grant_type,
-            "scope": self.scope
+            "scope": self.scope,
         }
-        req = requests.post(
-            url=self.url,
-            json=query,
-            headers=self.headers
-        )
+        req = requests.post(url=self.url, json=query, headers=self.headers)
         if req.status_code != 200:
             raise AuthorizationError(f"HTTP CODE: {req.status_code}")
 

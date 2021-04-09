@@ -1,4 +1,5 @@
 import os
+
 from osu.oauth import ClientCredentials
 from osu.oauth.model import ClientCredentialModel
 
@@ -10,6 +11,8 @@ except TypeError as e:
 
 
 def test_get_client_credentials():
-    credentials_obj = ClientCredentials(client_id=client_id, client_secret=client_secret)
+    credentials_obj = ClientCredentials(
+        client_id=client_id, client_secret=client_secret
+    )
     credential = credentials_obj.get_access_token()
     assert ClientCredentialModel(**credential.dict())
