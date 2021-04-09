@@ -21,10 +21,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies and osu.py
         run: |
-          pip install pytest pytest-cov pytest-asyncio mypy flake8 black isort autoflake wheel
+          pip install -r requirements_dev.txt
           pip install -r requirements.txt
           pip install .
       - name: Test
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         run: bash scripts/test.sh
+
       - name: Upload coverage
         uses: codecov/codecov-action@v1
